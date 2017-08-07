@@ -5,71 +5,71 @@
 var languageStrings = {
     'en': {
         'translation': {
-            'WELCOME' : "Welcome to Gloucester Guide!",
-            'HELP'    : "Say about, to hear more about the city, or say coffee, breakfast, lunch, or dinner, to hear local restaurant suggestions, or say recommend an attraction, or say, go outside. ",
-            'ABOUT'   : "Gloucester Massachusetts is a city on the Atlantic Ocean.  A popular summer beach destination, Gloucester has a rich history of fishing and ship building.",
+            'WELCOME' : "Welcome to Hillsboro Guide!",
+            'HELP'    : "Say about, to hear more about the city, or say coffee, breakfast, lunch, or dinner, to hear local restaurant suggestions, or say recommend an attraction, or say, go outside.",
+            'ABOUT'   : "Hillsboro Oregon the fifth-largest city in the State of Oregon. Lying in the Tualatin Valley on the west side of the Portland metropolitan area, the city hosts many high-technology companies that comprise what has become known as the Silicon Forest.",
             'STOP'    : "Okay, see you next time!"
         }
     }
     // , 'de-DE': { 'translation' : { 'TITLE'   : "Local Helfer etc." } }
 };
 var data = {
-    "city"        : "Gloucester",
-    "state"       : "MA",
-    "postcode"    : "01930",
+    "city"        : "Hillsboro",
+    "state"       : "OR",
+    "postcode"    : "97003",
     "restaurants" : [
-        { "name":"Zeke's Place",
-            "address":"66 East Main Street", "phone": "978-283-0474",
-            "meals": "breakfast, lunch",
-            "description": "A cozy and popular spot for breakfast.  Try the blueberry french toast!"
-        },
-        { "name":"Morning Glory Coffee Shop",
-            "address":"25 Western Avenue", "phone": "978-281-1851",
-            "meals": "coffee, breakfast, lunch",
-            "description": "A homestyle diner located just across the street from the harbor sea wall."
-        },
-        { "name":"Sugar Magnolias",
-            "address":"112 Main Street", "phone": "978-281-5310",
-            "meals": "breakfast, lunch",
-            "description": "A quaint eatery, popular for weekend brunch.  Try the carrot cake pancakes."
-        },
-        { "name":"Seaport Grille",
-            "address":"6 Rowe Square", "phone": "978-282-9799",
+        { "name":"Mr. Bento Burger",
+            "address":"7180 NE Cornell Rd", "phone": "503-746-7325",
             "meals": "lunch, dinner",
-            "description": "Serving seafood, steak and casual fare.  Enjoy harbor views on the deck."
+            "description": "A unique resturant that serves gourmet char-grilled burgers on brioche buns with an asian fusion twist."
         },
-        { "name":"Latitude 43",
-            "address":"25 Rogers Street", "phone": "978-281-0223",
-            "meals": "lunch, dinner",
-            "description": "Features artsy decor and sushi specials.  Live music evenings at the adjoining Minglewood Tavern."
-        },
-        { "name":"George's Coffee Shop",
-            "address":"178 Washington Street", "phone": "978-281-1910",
+        { "name":"Taming of the Brew",
+            "address":"530 SW 205th Ave", "phone": "503-533-9717",
             "meals": "coffee, breakfast, lunch",
-            "description": "A highly rated local diner with generously sized plates."
+            "description": "A coffee and tea shop focused on giving customers a great cafe experience as well as a community hub for relaxation."
+        },
+        { "name":"Manaia Coffee House and Island Grill",
+            "address":"203 E Main St", "phone": "503-747-7039",
+            "meals": "coffee, breakfast, lunch",
+            "description": "Daytime cafe with locally sourced coffee & traditional Samoan fare such as BBQ plates and rice bowls."
+        },
+        { "name":"Vivi’s Vietnamese Noodle House",
+            "address":"1035 NE 25th Ave", "phone": "503-648-2300",
+            "meals": "lunch, dinner",
+            "description": "Low-key Vietnamese place serving homestyle menu including appetizers, pho soups and rice dishes."
+        },
+        { "name":"Amelia’s Restaurant",
+            "address":"105 NE 4th Ave", "phone": "503-615-0191",
+            "meals": "breakfast, lunch, dinner",
+            "description": "Features rustic, Mexican cuisine. You will love the fresh tortillas and salsa."
+        },
+        { "name":"The Meating Place",
+            "address":"6495 NW Cornelius Pass Rd", "phone": "503-533-0624",
+            "meals": "breakfast, lunch",
+            "description": "A highly rated cafe serving house-made sausages and sandwiches."
         },
 
     ],
     "attractions":[
         {
-            "name": "Whale Watching",
-            "description": "Gloucester has tour boats that depart twice daily from Rogers street at the harbor.  Try either the 7 Seas Whale Watch, or Captain Bill and Sons Whale Watch. ",
+            "name": "Rice Northwest Museum of Rocks and Minerals",
+            "description": "Geology museum displaying an array of geodes, gems, minerals, petrified wood, fossils and crystals.",
             "distance": "0"
         },
         {
-            "name": "Good Harbor Beach",
-            "description": "Facing the Atlantic Ocean, Good Harbor Beach has huge expanses of soft white sand that attracts hundreds of visitors every day during the summer.",
-            "distance": "2"
+            "name": "Washington County Museum",
+            "description": "Opened in 1975, the museum is operated by the Washington County Historical Society with a mission of preserving the history of the area.",
+            "distance": "0"
         },
         {
-            "name": "Rockport",
-            "description": "A quaint New England town, Rockport is famous for rocky beaches, seaside parks, lobster fishing boats, and several art studios.",
-            "distance": "4"
+            "name": "Pittock Mansion",
+            "description": "A visit to this 16,000 square foot chateaueseque mansion, nestled in Portland's west hills, will bring you back to the romantic charm of a vanished era.",
+            "distance": "20"
         },
         {
-            "name": "Fenway Park",
-            "description": "Home of the Boston Red Sox, Fenway park hosts baseball games From April until October, and is open for tours. ",
-            "distance": "38"
+            "name": "Lan Su Chinese Garden",
+            "description": "Located in the heart of the city in Chinatown, Lan Su Chinese Garden has been called the most exquisite, authentic Suzhou-style garden ever built outside China.",
+            "distance": "22"
         }
     ]
 }
@@ -188,10 +188,39 @@ var handlers = {
                 + ' is '
                 + currentTemp + ' and ' + currentCondition);
 
-            // TODO
-            // Decide, based on current time and weather conditions,
-            // whether to go out to a local beach or park;
-            // or recommend a movie theatre; or recommend staying home
+            var AMPM = localTime.substring(6,8);
+            console.log(AMPM);
+            var hour = parseInt(localTime.substring(6,8));
+            if(AMPM == "PM") { hour = hour + 12; }
+
+            var suggestion = 'Read a book.';
+
+            console.log(suggestion);
+
+            if(hour < 7 ) {suggestion = 'Sleep.'; }
+            if(hour >= 7 && hour < 12) {suggestion = 'Ask me for a breakfast recommendation.'; }
+            if(hour >= 12 && hour < 14) {suggestion = 'Ask me for a lunch recommendation.'; }
+            if(hour >= 17 && hour < 20) {suggestion = 'Ask me for a dinner recommendation.'; }
+
+            if(hour >= 22) {suggestion = 'Go to bed.'; }
+
+            if(hour >= 20 && hour < 22) {
+                if(['Rain', 'Shower', 'Thunderstorms'].indexOf(currentCondition) > -1) {
+                    suggestion = 'Stay home and watch a movie on Amazon Prime since it is wet outside.';
+                } else {
+                    suggestion = 'Check out what is playing at the Venetian Theatre on 253 E Main St.';
+                }
+
+            }
+
+            if (['Sunny'].indexOf(currentCondition) > -1 -1 && currentTemp > 75 && hour < 11) {suggestion = 'Plan a day on the coast, as it is sunny and warm today.'}
+
+            console.log(suggestion);
+            this.emit(':tell', 'It is ' + localTime
+            + ' and the weather in ' + data.city
+            + ' is '
+            + currentTemp + ' and ' + currentCondition
+            + '. I suggest you ' + suggestion);
 
 
         });
